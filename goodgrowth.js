@@ -15,8 +15,7 @@ console.log(typeof lon); */
 
 // function to get data from the API
 async function getData() {
-  const url =
-    "https://europe-west1-amigo-actions.cloudfunctions.net/recruitment-mock-weather-endpoint/forecast?appid=a2ef86c41a&lat=27.987850&lon=86.925026";
+  const url = `https://europe-west1-amigo-actions.cloudfunctions.net/recruitment-mock-weather-endpoint/forecast?appid=a2ef86c41a&lat=${lat}&lon=${lon}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -32,6 +31,7 @@ async function getData() {
 }
 
 // and store it in a constant. Extract what we need from it whereever we want to render info
+// only making one call to the API, any subsequent uses of accessing weatherData will use the same data rather than making new requests
 const weatherData = await getData();
 // testing we can still access data as we need
-console.log(weatherData.list[0].main.temp);
+console.log(weatherData.list[0].main.temp + "working temp");
