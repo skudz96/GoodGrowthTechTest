@@ -45,6 +45,13 @@ function formatTime(datetimeStr) {
   });
 }
 
+// title container
+const title = document.createElement("h2");
+title.textContent = "Weather Forecast for the next 12 hours:";
+title.style.fontSize = "1.5rem";
+title.style.marginBottom = "0.5rem";
+title.style.fontWeight = "600";
+
 // function to create a weather card with all our desired information and light styling
 function createWeatherCard(entry) {
   // create a new div element to contain the weather data
@@ -117,3 +124,6 @@ if (target) {
 } else {
   console.error("Target element not found");
 }
+
+// append the title to the target element
+wrapper.parentNode.insertBefore(title, wrapper);
