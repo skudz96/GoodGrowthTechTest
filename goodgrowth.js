@@ -35,3 +35,30 @@ async function getData() {
 const weatherData = await getData();
 // testing we can still access data as we need
 console.log(weatherData.list[0].main.temp + "working temp");
+
+// grab the js path of target container where we want to inject weather data from dev tools
+const target = document.querySelector(
+  "#content > section.Sectionstyle__StyledSection-sc-1rnt8u1-0.eigAqT.Placestyle__HeroSection-sc-7yy3d-0.kfKURt > div > div > div > div"
+);
+// create a new div element to contain the weather data
+const weatherContainer = document.createElement("div");
+// give it a unique ID
+weatherContainer.id = "weather-widget";
+// add some basic styling
+weatherContainer.style.marginTop = "10px";
+weatherContainer.style.padding = "10px";
+weatherContainer.style.border = "1px solid #ccc";
+weatherContainer.style.background = "#f5f5f5";
+weatherContainer.style.fontSize = "1rem";
+
+// get the temperature to 1 decimal place
+const temp = weatherData.list[0].main.temp.toFixed(1);
+// inject the temp into newly created weatherContainer
+weatherContainer.innerText = `Current temperature: ${temp}°C`;
+
+// append the weatherContainer to the target element
+if (target) {
+  target.appendChild(weatherContainer);
+} else {
+  console.error("Target element not found");
+}
