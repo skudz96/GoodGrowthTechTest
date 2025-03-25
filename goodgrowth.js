@@ -47,10 +47,11 @@ function formatTime(datetimeStr) {
 
 // title container
 const title = document.createElement("h2");
-title.textContent = "Weather Forecast for the next 12 hours:";
+title.textContent = "Weather Forecast for the next 24 hours:";
 title.style.fontSize = "1.5rem";
 title.style.marginBottom = "0.5rem";
 title.style.fontWeight = "600";
+title.style.textAlign = "center";
 
 // function to create a weather card with all our desired information and light styling
 function createWeatherCard(entry) {
@@ -107,9 +108,9 @@ wrapper.style.padding = "10px";
 wrapper.style.borderRadius = "10px";
 
 // loop through the weather data and create a card for today's forecast
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < 8; i++) {
   const entry = weatherData.list[i];
-  // append the card to the wrapper. Looping through the first 4 entries to display the next 12 hours
+  // append the card to the wrapper. Looping through the first 8 entries to display the next 24 hours
   wrapper.appendChild(createWeatherCard(entry));
 }
 
@@ -118,12 +119,18 @@ const target = document.querySelector(
   "#content > section.Sectionstyle__StyledSection-sc-1rnt8u1-0.eigAqT.Placestyle__HeroSection-sc-7yy3d-0.kfKURt > div > div > div > div"
 );
 
-// append the wrapper to the target element
+// create a parent container to hold both title and wrapper, fixing misalignment
+const weatherContainer = document.createElement("div");
+weatherContainer.style.margin = "20px auto";
+weatherContainer.style.fontFamily = "sans-serif";
+
+// move title and wrapper into this container
+weatherContainer.appendChild(title);
+weatherContainer.appendChild(wrapper);
+
+// append the new parent container to the target element
 if (target) {
-  target.appendChild(wrapper);
+  target.appendChild(weatherContainer);
 } else {
   console.error("Target element not found");
 }
-
-// append the title to the target element
-wrapper.parentNode.insertBefore(title, wrapper);
