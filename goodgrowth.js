@@ -67,7 +67,7 @@ function createWeatherCard(entry) {
 
   // icon container
   const icon = document.createElement("img");
-  icon.src = entry.weather[0].icon;
+  icon.src = `https://openweathermap.org/img/wn/${entry.weather[0].icon}.png`;
   icon.style.width = "50px";
 
   // temp container to 1 decimal place
